@@ -1,0 +1,100 @@
+DATABASE RELATED COMMANDS
+
+a) View all databases :-
+   show dbs
+
+b) Create a new or switch database :-
+   use db_name
+
+c) To show the database we are working in / View current database :-
+   db
+
+d) Delete a database :-
+   db.dropDatabase()
+   { "ok" : 1 } --> means database has been dropped/deleted successfully
+
+
+COLLECTION RELATED COMMANDS
+
+a) View all collections :-
+   show collections
+
+b) Create a collection
+   db.createCollection('collection_name')
+
+c) Delete/Drop a collection :-
+   db.collection_name.drop()
+
+
+ROWS/DOCUMENTS RELATED COMMANDS
+
+a) Insert one row
+   db.collection_name.insert({
+      'name': 'Harry',
+      'lang': 'JavaScript',
+      'member_since': 5
+   })
+   inserts the row to collection collection_name
+
+b) Insert more than one row
+   db.collection_name.insertMany([{
+      'name': 'Harry',
+      'lang': 'JavaScript',
+      'member_since': 5
+   },
+   {
+      'name': 'Rohan',
+      'lang': 'Python',
+      'member_since': 3
+   },
+   {
+      'name': 'Lovish',
+      'lang': 'Java',
+      'member_since': 4
+   }])
+   
+c) View all the rows in a collection
+   db.collection_name.find()   
+
+d) View all the rows in a collection (prettified)
+   db.collection_name.find().pretty()
+
+e) Search in a MongoDB database   
+   db.collection_name.find({object})   
+
+f) Limit the number of rows in output
+   db.collection_name.find().pretty().limit(number)   --> limits the number of rows which are being printed
+
+g) Count the number of rows in the output
+   db.collection_name.find().count()  --> gives number of rows in the output not number of rows which are being printed
+
+h) Sort the rows on the basis of field_name
+   1) In ascending order
+      db.comments.find().sort({field_name : 1}).pretty()
+   2) In descending order
+      db.comments.find().sort({field_name : -1}).pretty()
+
+i) Find the first row matching the object
+   db.collection_name.findOne({object})
+
+j) Update a specific field in a row
+   db.collection_name.update(object, updated_object, {upsert: true})
+   object --> search filter
+   upsert --> to insert a new object in case no object/row corresponding to search filter is found
+   If we do not write {upsert: true}, then by default there will be only updation and no insertion
+
+k) Increment operator
+   db.collection_name.update(object, {$inc: {field_name: number to be Incremented by}})
+
+l) Rename operator (to rename a field)
+   db.collection_name.update(object, {$rename: {field_name: 'updated_field_name'}})
+
+m) Delete row
+   db.comments.remove(object)
+
+n) Less than / Greater than / Less than or equal to / Greater than or equal to
+   db.comments.find({field_name: {$lt: number}})
+   db.comments.find({field_name: {$lt: number}})
+   db.comments.find({field_name: {$lt: number}})
+   db.comments.find({field_name: {$lt: number}})
+   
